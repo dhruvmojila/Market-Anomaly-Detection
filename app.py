@@ -129,7 +129,7 @@ def make_prediction(normalised_user_input):
         'Isolation Forest' : iso_forest_predictions1_binary[0],
         'Logistic Regression' : log_reg_prediction1[0],
         'Neural Network' : mlp_prediction1[0],
-        'indexes': 'XAU BGNL, CRY, DXY, JPY, GBP'
+        'Indices': 'XAU BGNL, CRY, DXY, JPY, GBP'
     }
 
     iso_forest_predictions2 = st.session_state.models['isolation_forest_model_Economic Sentiment'].predict(normalised_user_input[['USGG30YR','USGG3M', 'EONIA', 'LUMSTRUU', 'LUACTRUU']])
@@ -146,7 +146,7 @@ def make_prediction(normalised_user_input):
         'Isolation Forest' : iso_forest_predictions2_binary[0],
         'Logistic Regression' : log_reg_prediction2[0],
         'Neural Network' : mlp_prediction2[0],
-        'indexes': 'USGG30YR,USGG3M, EONIA, LUMSTRUU, LUACTRUU'
+        'Indices': 'USGG30YR,USGG3M, EONIA, LUMSTRUU, LUACTRUU'
     }
 
 
@@ -164,7 +164,7 @@ def make_prediction(normalised_user_input):
         'Isolation Forest' : iso_forest_predictions3_binary[0],
         'Logistic Regression' : log_reg_prediction3[0],
         'Neural Network' : mlp_prediction3[0],
-        'indexes': 'MXUS, MXEU, MXJP, MXBR, MXCN'
+        'Indices': 'MXUS, MXEU, MXJP, MXBR, MXCN'
     }
 
     iso_forest_predictions4 = st.session_state.models['isolation_forest_model_Liquidity and Money Market Indicators'].predict(normalised_user_input[['LUMSTRUU', 'LUACTRUU', 'LF94TRUU']])
@@ -181,7 +181,7 @@ def make_prediction(normalised_user_input):
         'Isolation Forest' : iso_forest_predictions4_binary[0],
         'Logistic Regression' : log_reg_prediction4[0],
         'Neural Network' : mlp_prediction4[0],
-        'indexes': 'LUMSTRUU, LUACTRUU, LF94TRUU'
+        'Indices': 'LUMSTRUU, LUACTRUU, LF94TRUU'
     }
 
     iso_forest_predictions5 = st.session_state.models['isolation_forest_model_Volatility Indicators'].predict(normalised_user_input[['VIX', 'BDIY']])
@@ -198,7 +198,7 @@ def make_prediction(normalised_user_input):
         'Isolation Forest' : iso_forest_predictions5_binary[0],
         'Logistic Regression' : log_reg_prediction5[0],
         'Neural Network' : mlp_prediction5[0],
-        'indexes': 'VIX, BDIY',
+        'Indices': 'VIX, BDIY',
     }
 
     return {'overall_pred' : voting([s1['Strategy_prediction'],s2['Strategy_prediction'],s3['Strategy_prediction'],s4['Strategy_prediction'],s5['Strategy_prediction']]),
@@ -332,9 +332,9 @@ if (st.button("Predict Market Crash", on_click=callback) or st.session_state.btn
 
         with st.expander(f"Metric: {strategy_name} - Prediction: {strategy_prediction}"):
             st.subheader("Model Predictions")
-            st.write(f"Indexes : {strategy_data['indexes']}")
+            st.write(f"Indices : {strategy_data['Indices']}")
             for model_name, model_prediction in strategy_data.items():
-                if model_name not in ["Strategy", "Strategy_prediction"]:
+                if model_name not in ["Strategy", "Strategy_prediction", "Indices"]:
                     model_result = "Crash" if model_prediction == 1 else "No Crash"
                     st.write(f"- {model_name}: {model_result}")
 

@@ -24,7 +24,7 @@ def get_huggingface_embeddings(text, model_name="sentence-transformers/all-mpnet
 
 client = OpenAI(
     base_url="https://api.groq.com/openai/v1",
-    api_key=os.getenv("GROQ_API_KEY")
+    api_key=os.environ["GROQ_API_KEY"]
 )
 
 pinecone_api_key = os.getenv("PINECONE_API_KEY")

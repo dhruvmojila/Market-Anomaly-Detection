@@ -2,13 +2,13 @@ import streamlit as st
 import pandas as pd
 import os
 import joblib
-from openai import OpenAI
 from pinecone import Pinecone
 from sklearn.preprocessing import MinMaxScaler
 import numpy as np
 from dotenv import load_dotenv
 from sentence_transformers import SentenceTransformer
 from streamlit_chat import message
+from groq import Groq
 
 if "btn_clicked" not in st.session_state:
         st.session_state.btn_clicked = False
@@ -22,9 +22,8 @@ def get_huggingface_embeddings(text, model_name="sentence-transformers/all-mpnet
     model = SentenceTransformer(model_name)
     return model.encode(text)
 
-client = OpenAI(
+client = Groq(
     api_key=os.environ.get('GROQ_API_KEY'),
-    base_url="https://api.groq.com/openai/v1"
 )
 
 pinecone_api_key = os.getenv("PINECONE_API_KEY")
